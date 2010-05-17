@@ -10,11 +10,11 @@ class CTM_Machine_Factory
      */
     public static function factory()
     {
-        $os = php_uname('s');
+        $os = trim(php_uname('s'));
 
-        if (stripos($os, 'win') !== false) {
-            require_once 'CTM/Machine/Windows.php';
-            return new CTM_Machine_Windows();
+        if (strcasecmp($os, 'darwin') == 0) {
+            require_once 'CTM/Machine/Mac.php';
+            return new CTM_Machine_Mac();
         }
 
         if (stripos($os, 'linux') !== false) {
@@ -22,9 +22,9 @@ class CTM_Machine_Factory
             return new CTM_Machine_Linux();
         }
 
-        if (stripos($os, 'darwin') !== false) {
-            require_once 'CTM/Machine/Mac.php';
-            return new CTM_Machine_Mac();
+        if (stripos($os, 'win') !== false) {
+            require_once 'CTM/Machine/Windows.php';
+            return new CTM_Machine_Windows();
         }
 
         throw new Exception('Could not identify OS.');
