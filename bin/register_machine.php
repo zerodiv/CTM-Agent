@@ -5,7 +5,7 @@ require_once dirname(__FILE__) . '/../bootstrap.php';
 require_once 'Light/CommandLine/Script.php';
 require_once 'CTM/Machine/Factory.php';
 
-class CTM_Register_Linux extends Light_CommandLine_Script {
+class CTM_Register_Machine extends Light_CommandLine_Script {
 
     protected $machine;
 
@@ -49,4 +49,4 @@ class CTM_Register_Linux extends Light_CommandLine_Script {
     }
 }
 
-$ctm_register_obj = new CTM_Register_Linux();
+$ctm_register_obj = new CTM_Register_Machine();
