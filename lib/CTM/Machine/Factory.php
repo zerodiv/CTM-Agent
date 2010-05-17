@@ -12,20 +12,20 @@ class CTM_Machine_Factory
     {
         $os = php_uname('s');
 
-//        if (stripos($os, 'win') !== false) {
-//            require_once 'CTM/Machine/Windows.php';
-//            return new CTM_Machine_Windows();
-//        }
-//
-//        if (stripos($os, 'linux') !== false) {
-//            require_once 'CTM/Machine/Linux.php';
-//            return new CTM_Machine_Linux();
-//        }
-//
-//        if (stripos($os, 'Darwin') !== false) {
+        if (stripos($os, 'win') !== false) {
+            require_once 'CTM/Machine/Windows.php';
+            return new CTM_Machine_Windows();
+        }
+
+        if (stripos($os, 'linux') !== false) {
+            require_once 'CTM/Machine/Linux.php';
+            return new CTM_Machine_Linux();
+        }
+
+        if (stripos($os, 'darwin') !== false) {
             require_once 'CTM/Machine/Mac.php';
             return new CTM_Machine_Mac();
-//        }
+        }
 
         throw new Exception('Could not identify OS.');
     }

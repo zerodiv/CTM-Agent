@@ -11,21 +11,18 @@ class CTM_Machine_Mac extends CTM_Machine
     
     public function findGuid()
     {
-        exec('hostname', $output, $return);
+        exec('/usr/sbin/system_profiler | grep "Hardware UUID"', $output, $return);
 
-        if ((string) $return === '0') {
-            if (!empty($output) && is_array($output)) {
-                $this->guid = array_pop($output);
+        if (!empty($output) && is_array($output)) {
+            $guidString = array_pop($output);
+            if (!empty($guidString)) {
+                if (preg_match('#\s*Hardware UUID\:\s*(.+)$#', $guidString, $guidMatches) > 0) {
+                    $this->guid = $guidMatches[1];
+                }
             }
         }
     }
-
-    public function findIp()
-    {
-        preg_match_all('/inet addr:\s?([^\s]+)/', `ifconfig -a`, $ips);
-        $this->ip =  $ips[1][0]; // this is unreliable
-    }
-
+    
     public function findOs()
     {
         exec('uname -sp', $output, $return);

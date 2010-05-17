@@ -23,7 +23,6 @@ class CTM_Register_Machine extends Light_CommandLine_Script {
 
         $post_values = array();
         $post_values['guid'] = $this->machine->getGuid();
-        $post_values['ip'] = $this->machine->getIp();
         $post_values['os'] = $this->machine->getOs();
 
         $browsers = $this->machine->getBrowsers();

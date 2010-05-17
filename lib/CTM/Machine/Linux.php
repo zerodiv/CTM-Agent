@@ -22,12 +22,6 @@ class CTM_Machine_Linux extends CTM_Machine
         }
     }
 
-    public function findIp()
-    {
-        preg_match_all('/inet addr:\s?([^\s]+)/', `ifconfig`, $ips);
-        $this->ip =  $ips[1][0]; // this is unreliable
-    }
-
     public function findOs()
     {
         exec('uname -sp', $output, $return);
