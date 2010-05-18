@@ -45,26 +45,15 @@ class CTM_Machine_Mac extends CTM_Machine
 
     protected function findFirefox()
     {
-        if (is_file('/Applications/Firefox.app/Contents/MacOS/updates.xml')) {
+        $file = '/Applications/Firefox.app/Contents/Info.plist';
+
+        if (is_file($file)) {
 
             try {
 
-                $xml = simplexml_load_file('/Applications/Firefox.app/Contents/MacOS/updates.xml');
-
-                if (isset($xml->update[0])) {
-
-                    $version = null;
-
-                    foreach ($xml->update[0]->attributes() as $f => $f_v) {
-                        if ($f == 'version') {
-                            $version = (string) $f_v;
-                        }
-                    }
-
-                    if (isset($version)) {
-                        $this->browsers[self::MACHINE_BROWSER_FIREFOX] = $version;
-                    }
-                }
+                $xml = simplexml_load_file($file);
+                
+                $this->browsers[self::MACHINE_BROWSER_FIREFOX] = (string) $xml->dict->string[8];
 
             } catch (Exception $e) {
                 $e = null;
