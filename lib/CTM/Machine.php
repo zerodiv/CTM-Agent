@@ -4,7 +4,7 @@ abstract class CTM_Machine
 {
     const MACHINE_BROWSER_FIREFOX = 'firefox';
     const MACHINE_BROWSER_EXPLORER = 'ie';
-    const MACHINE_BROWSER_CHROME = 'chrome';
+    const MACHINE_BROWSER_GOOGLECHROME = 'googlechrome';
     const MACHINE_BROWSER_SAFARI = 'safari';
 
     protected $guid;

@@ -38,7 +38,7 @@ class CTM_Machine_Linux extends CTM_Machine
     public function findBrowsers()
     {
         $this->findFirefox();
-        $this->findChrome();
+        $this->findGoogleChrome();
     }
 
     protected function findFirefox()
@@ -67,9 +67,9 @@ class CTM_Machine_Linux extends CTM_Machine
     }
 
     /**
-     * @todo Chrome implementation missing
+     * @todo Google Chrome implementation missing
      */
-    protected function findChrome()
+    protected function findGoogleChrome()
     {
         
     }

@@ -39,7 +39,7 @@ class CTM_Machine_Mac extends CTM_Machine
     public function findBrowsers()
     {
         $this->findFirefox();
-        $this->findChrome();
+        $this->findGoogleChrome();
         $this->findSafari();
     }
 
@@ -62,7 +62,7 @@ class CTM_Machine_Mac extends CTM_Machine
     }
 
 
-    protected function findChrome()
+    protected function findGoogleChrome()
     {
         if (is_dir('/Applications/Google Chrome.app/Contents/Versions/')) {
 
@@ -99,7 +99,7 @@ class CTM_Machine_Mac extends CTM_Machine
             }
 
             if (isset($high_version_id)) {
-                $this->browsers[self::MACHINE_BROWSER_CHROME] = (string) $high_version_id;
+                $this->browsers[self::MACHINE_BROWSER_GOOGLECHROME] = (string) $high_version_id;
             }
         }
     }
