@@ -126,28 +126,27 @@ class CTM_Test_Agent extends Light_CommandLine_Script
     {
         $this->message("Downloading test data from {$this->downloadUrl}.");
 
+        $this->message("Writing test data to {$this->files->getSuiteFile()}.");
+        $handle = fopen($this->files->getSuiteFile(), 'w');
+
         $ch = curl_init($this->downloadUrl);
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, array());
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_BINARYTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HEADER, false);
+        curl_setopt($ch, CURLOPT_FILE, $handle);
+        
+        curl_exec($ch);
 
-        $return_data = curl_exec($ch);
         $return_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
         curl_close($ch);
-
-        $this->message("Return Status for downloadTest(): " . $return_status);
-
-
-        $this->message("Writing test data to {$this->files->getSuiteFile()}.");
-        
-        // write zip to disk
-        $handle = fopen($this->files->getSuiteFile(), 'w');
-        fwrite($handle, $return_data);
         fclose($handle);
 
+        $this->message("Return Status for downloadTest(): " . $return_status);
+        
         // extract suite zip
+        $this->message("Unzipping file to {$this->files->getSuiteDir()}");
         system("unzip {$this->files->getSuiteFile()} -d {$this->files->getSuiteDir()}");
     }
 
