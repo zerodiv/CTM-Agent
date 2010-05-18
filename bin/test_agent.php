@@ -47,7 +47,7 @@ class CTM_Test_Agent extends Light_CommandLine_Script
 
                 // see -browserSideLog and -log for debugging information at
                 // http://seleniumhq.org/docs/05_selenium_rc.html#selenium-server-logging
-                $commandString = "java -jar selenium-server.jar -multiwindow -htmlSuite '*" . $this->testBrowser . "' 'http://www.adicio.com/' '" .  $this->files->getSuite() . "' '" . $this->files->getLogFile() . "'";
+                $commandString = "java -jar " . dirname(__FILE__) . "/selenium-server.jar -multiwindow -htmlSuite '*" . $this->testBrowser . "' 'http://www.adicio.com/' '" .  $this->files->getSuite() . "' '" . $this->files->getLogFile() . "'";
 
                 $this->message("Running $commandString");
 
