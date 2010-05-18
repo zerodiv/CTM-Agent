@@ -130,6 +130,7 @@ class CTM_Test_Agent extends Light_CommandLine_Script
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, array());
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_BINARYTRANSFER, true);
 
         $return_data = curl_exec($ch);
         $return_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
