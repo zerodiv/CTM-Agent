@@ -34,12 +34,11 @@ class CTM_Test_Agent extends Light_CommandLine_Script
     public function run()
     {
         $this->message("Running CTM_Test_Agent.");
-        $this->message("Requesting work.");
+        
         $this->getTestData();
 
         if (!empty($this->downloadUrl)) {
             
-            $this->message("Downloading test data from {$this->downloadUrl}.");
             $this->downloadTest();
 
             if ($this->testBrowser) {
@@ -84,6 +83,8 @@ class CTM_Test_Agent extends Light_CommandLine_Script
      */
     protected function getTestData()
     {
+        $this->message("Requesting work.");
+
         $post_values = array();
         $post_values['guid'] = $this->machine->getGuid();
 
@@ -123,6 +124,8 @@ class CTM_Test_Agent extends Light_CommandLine_Script
      */
     protected function downloadTest()
     {
+        $this->message("Downloading test data from {$this->downloadUrl}.");
+
         $ch = curl_init($this->downloadUrl);
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, array());
@@ -135,6 +138,9 @@ class CTM_Test_Agent extends Light_CommandLine_Script
 
         $this->message("Return Status for downloadTest(): " . $return_status);
 
+
+        $this->message("Writing test data to {$this->files->getSuiteFile()}.");
+        
         // write zip to disk
         $handle = fopen($this->files->getSuiteFile(), 'w');
         fwrite($handle, $return_data);
@@ -150,6 +156,8 @@ class CTM_Test_Agent extends Light_CommandLine_Script
      */
     protected function sendLog()
     {
+        $this->message("Sending log file {$this->files->getLogFile()} data back.");
+
         // send the output back to CTM
         $ch = curl_init($this->arguments()->getArgument('server')->getValue() . '/et/log/');
         curl_setopt($ch, CURLOPT_POST, true);
